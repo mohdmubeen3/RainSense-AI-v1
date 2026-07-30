@@ -8,29 +8,19 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>RainSense AI | Machine Learning Rainfall Prediction</title>
+    <title>RainSense AI</title>
 
     <meta name="description"
-          content="AI Powered Rainfall Prediction System using Machine Learning and Flask">
-
-    <meta name="author"
-          content="Mohd Mubeen Sheikh">
+          content="AI Powered Rainfall Prediction using Machine Learning">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
@@ -39,935 +29,373 @@
 
 <body>
 
-<div class="background-animation"></div>
+<div class="main-container">
 
-<div class="container py-5">
+    <div class="glass-card">
 
-    <div class="row justify-content-center">
+        <!-- ========================= -->
+        <!-- Header -->
+        <!-- ========================= -->
 
-        <div class="col-xl-10">
+        <div class="text-center">
 
-            <div class="glass-card shadow-lg">
+            <div class="logo">
 
-                <!-- ========================= -->
-                <!-- HEADER -->
-                <!-- ========================= -->
-
-                <div class="text-center mb-5">
-
-                    <div class="logo-circle mb-4">
-
-                        <i class="bi bi-cloud-rain-heavy-fill"></i>
-
-                    </div>
-
-                    <h1 class="main-title">
-
-                        RainSense AI
-
-                    </h1>
-
-                    <p class="sub-title">
-
-                        AI Powered Rainfall Prediction using Random Forest Machine Learning
-
-                    </p>
-
-                </div>
-
-                <!-- ========================= -->
-                <!-- Progress -->
-                <!-- ========================= -->
-
-                <div class="progress-wrapper mb-5">
-
-                    <div class="progress">
-
-                        <div
-                            class="progress-bar"
-
-                            id="progressBar"
-
-                            role="progressbar"
-
-                            style="width:25%;">
-
-                        </div>
-
-                    </div>
-
-                    <div class="step-indicator mt-4">
-
-                        <div class="step active">
-
-                            <div class="circle">
-
-                                1
-
-                            </div>
-
-                            <span>
-
-                                Basic Info
-
-                            </span>
-
-                        </div>
-
-                        <div class="step">
-
-                            <div class="circle">
-
-                                2
-
-                            </div>
-
-                            <span>
-
-                                Weather
-
-                            </span>
-
-                        </div>
-
-                        <div class="step">
-
-                            <div class="circle">
-
-                                3
-
-                            </div>
-
-                            <span>
-
-                                Wind
-
-                            </span>
-
-                        </div>
-
-                        <div class="step">
-
-                            <div class="circle">
-
-                                4
-
-                            </div>
-
-                            <span>
-
-                                Predict
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- ========================= -->
-                <!-- FORM -->
-                <!-- ========================= -->
-
-                <form id="predictionForm"
-                      method="POST"
-                      action="/predict">
-
-                <!-- ===================================== -->
-                <!-- STEP 1 -->
-                <!-- ===================================== -->
-
-                <section
-                    class="form-step active"
-                    id="step1">
-
-                    <h2 class="section-title">
-
-                        <i class="bi bi-geo-alt-fill"></i>
-
-                        Basic Information
-
-                    </h2>
-
-                    <p class="section-description">
-
-                        Choose your location and prediction date.
-
-                    </p>
-
-                    <div class="row g-4">
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Location
-
-                            </label>
-
-                            <select
-
-                                class="form-select"
-
-                                name="Location"
-
-                                required>
-
-                                <option value="">
-
-                                    Select Location
-
-                                </option>
-
-                                {% for location in locations %}
-
-                                <option value="{{ location }}">
-
-                                    {{ location }}
-
-                                </option>
-
-                                {% endfor %}
-
-                            </select>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Prediction Date
-
-                            </label>
-
-                            <input
-
-                                type="date"
-
-                                id="predictionDate"
-
-                                class="form-control"
-
-                                required>
-
-                        </div>
-
-                    </div>
-
-                    <!-- Hidden values generated automatically -->
-
-                    <input type="hidden"
-                           name="Year"
-                           id="year">
-
-                    <input type="hidden"
-                           name="Month"
-                           id="month">
-
-                    <input type="hidden"
-                           name="Day"
-                           id="day">
-
-                    <input type="hidden"
-                           name="Season"
-                           id="season">
-
-                    <div class="button-group mt-5">
-
-                        <button
-
-                            type="button"
-
-                            id="next1"
-
-                            class="btn btn-primary btn-lg next-btn">
-
-                            Next
-
-                            <i class="bi bi-arrow-right-circle-fill ms-2"></i>
-
-                        </button>
-
-                    </div>
-
-                </section>                <!-- ===================================== -->
-                <!-- STEP 2 -->
-                <!-- ===================================== -->
-
-                <section
-                    class="form-step"
-                    id="step2">
-
-                    <h2 class="section-title">
-
-                        <i class="bi bi-thermometer-half"></i>
-
-                        Weather Information
-
-                    </h2>
-
-                    <p class="section-description">
-
-                        Enter temperature and rainfall related information.
-
-                    </p>
-
-                    <div class="row g-4">
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Minimum Temperature (°C)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="MinTemp"
-                                step="0.1"
-                                placeholder="Example: 18.5"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Maximum Temperature (°C)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="MaxTemp"
-                                step="0.1"
-                                placeholder="Example: 31.2"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Temperature at 9 AM (°C)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Temp9am"
-                                step="0.1"
-                                placeholder="Example: 22.4"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Temperature at 3 PM (°C)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Temp3pm"
-                                step="0.1"
-                                placeholder="Example: 29.8"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Rainfall (mm)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Rainfall"
-                                min="0"
-                                step="0.1"
-                                placeholder="Example: 2.4"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Sunshine (Hours)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Sunshine"
-                                min="0"
-                                step="0.1"
-                                placeholder="Example: 8.6"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Evaporation (mm)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Evaporation"
-                                min="0"
-                                step="0.1"
-                                placeholder="Example: 5.1"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Rain Today
-
-                            </label>
-
-                            <select
-                                class="form-select"
-                                name="RainToday"
-                                required>
-
-                                <option value="">
-
-                                    Select
-
-                                </option>
-
-                                {% for rain in rain_today %}
-
-                                <option value="{{ rain }}">
-
-                                    {{ rain }}
-
-                                </option>
-
-                                {% endfor %}
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-                    <div class="button-group mt-5 d-flex justify-content-between">
-
-                        <button
-                            type="button"
-                            id="prev2"
-                            class="btn btn-outline-primary btn-lg">
-
-                            <i class="bi bi-arrow-left-circle-fill me-2"></i>
-
-                            Previous
-
-                        </button>
-
-                        <button
-                            type="button"
-                            id="next2"
-                            class="btn btn-primary btn-lg">
-
-                            Next
-
-                            <i class="bi bi-arrow-right-circle-fill ms-2"></i>
-
-                        </button>
-
-                    </div>
-
-                </section>                <!-- ===================================== -->
-                <!-- STEP 3 -->
-                <!-- ===================================== -->
-
-                <section
-                    class="form-step"
-                    id="step3">
-
-                    <h2 class="section-title">
-
-                        <i class="bi bi-wind"></i>
-
-                        Wind Information
-
-                    </h2>
-
-                    <p class="section-description">
-
-                        Wind plays an important role in rainfall prediction.
-                        Enter the wind direction and wind speed values.
-
-                    </p>
-
-                    <div class="row g-4">
-
-                        <!-- Wind Gust Direction -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Wind Gust Direction
-
-                            </label>
-
-                            <select
-                                class="form-select"
-                                name="WindGustDir"
-                                required>
-
-                                <option value="">
-
-                                    Select Wind Gust Direction
-
-                                </option>
-
-                                {% for direction in wind_directions %}
-
-                                <option value="{{ direction }}">
-
-                                    {{ direction }}
-
-                                </option>
-
-                                {% endfor %}
-
-                            </select>
-
-                        </div>
-
-                        <!-- Wind Gust Speed -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Wind Gust Speed (km/h)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="WindGustSpeed"
-                                min="0"
-                                step="0.1"
-                                placeholder="Example: 39.5"
-                                required>
-
-                        </div>
-
-                        <!-- Wind Direction 9AM -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Wind Direction at 9 AM
-
-                            </label>
-
-                            <select
-                                class="form-select"
-                                name="WindDir9am"
-                                required>
-
-                                <option value="">
-
-                                    Select Direction
-
-                                </option>
-
-                                {% for direction in wind_directions %}
-
-                                <option value="{{ direction }}">
-
-                                    {{ direction }}
-
-                                </option>
-
-                                {% endfor %}
-
-                            </select>
-
-                        </div>
-
-                        <!-- Wind Direction 3PM -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Wind Direction at 3 PM
-
-                            </label>
-
-                            <select
-                                class="form-select"
-                                name="WindDir3pm"
-                                required>
-
-                                <option value="">
-
-                                    Select Direction
-
-                                </option>
-
-                                {% for direction in wind_directions %}
-
-                                <option value="{{ direction }}">
-
-                                    {{ direction }}
-
-                                </option>
-
-                                {% endfor %}
-
-                            </select>
-
-                        </div>
-
-                        <!-- Wind Speed 9AM -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Wind Speed at 9 AM (km/h)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="WindSpeed9am"
-                                min="0"
-                                step="0.1"
-                                placeholder="Example: 18.2"
-                                required>
-
-                        </div>
-
-                        <!-- Wind Speed 3PM -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Wind Speed at 3 PM (km/h)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="WindSpeed3pm"
-                                min="0"
-                                step="0.1"
-                                placeholder="Example: 27.8"
-                                required>
-
-                        </div>
-
-                    </div>
-
-                    <div class="button-group mt-5 d-flex justify-content-between">
-
-                        <button
-                            type="button"
-                            id="prev3"
-                            class="btn btn-outline-primary btn-lg">
-
-                            <i class="bi bi-arrow-left-circle-fill me-2"></i>
-
-                            Previous
-
-                        </button>
-
-                        <button
-                            type="button"
-                            id="next3"
-                            class="btn btn-primary btn-lg">
-
-                            Next
-
-                            <i class="bi bi-arrow-right-circle-fill ms-2"></i>
-
-                            Next
-
-                        </button>
-
-                    </div>
-
-                </section>
-                                <!-- ===================================== -->
-                <!-- STEP 4 -->
-                <!-- ===================================== -->
-
-                <section
-                    class="form-step"
-                    id="step4">
-
-                    <h2 class="section-title">
-
-                        <i class="bi bi-cloud-drizzle-fill"></i>
-
-                        Atmospheric Conditions
-
-                    </h2>
-
-                    <p class="section-description">
-
-                        Provide the remaining atmospheric values required by
-                        the Machine Learning model.
-
-                    </p>
-
-                    <div class="row g-4">
-
-                        <!-- Humidity -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Humidity at 9 AM (%)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Humidity9am"
-                                min="0"
-                                max="100"
-                                placeholder="Example: 72"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Humidity at 3 PM (%)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Humidity3pm"
-                                min="0"
-                                max="100"
-                                placeholder="Example: 46"
-                                required>
-
-                        </div>
-
-                        <!-- Pressure -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Pressure at 9 AM (hPa)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Pressure9am"
-                                step="0.1"
-                                placeholder="Example: 1017.8"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Pressure at 3 PM (hPa)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Pressure3pm"
-                                step="0.1"
-                                placeholder="Example: 1013.2"
-                                required>
-
-                        </div>
-
-                        <!-- Cloud -->
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Cloud Cover at 9 AM
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Cloud9am"
-                                min="0"
-                                max="8"
-                                placeholder="0 - 8"
-                                required>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <label class="form-label">
-
-                                Cloud Cover at 3 PM
-
-                            </label>
-
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="Cloud3pm"
-                                min="0"
-                                max="8"
-                                placeholder="0 - 8"
-                                required>
-
-                        </div>
-
-                    </div>
-
-                    <div class="button-group mt-5 d-flex justify-content-between">
-
-                        <button
-                            type="button"
-                            id="prev4"
-                            class="btn btn-outline-primary btn-lg">
-
-                            <i class="bi bi-arrow-left-circle-fill me-2"></i>
-
-                            Previous
-
-                        </button>
-
-                        <button
-                            type="submit"
-                            class="btn btn-success btn-lg px-5">
-
-                            <i class="bi bi-magic me-2"></i>
-
-                            Predict Rainfall
-
-                        </button>
-
-                    </div>
-
-                </section>
-
-            </form>
-
-            <!-- ===================================== -->
-            <!-- Prediction Result -->
-            <!-- ===================================== -->
-
-            {% if prediction %}
-
-            <div class="prediction-card mt-5">
-
-                {% if prediction == "Yes" %}
-
-                <div class="alert alert-danger shadow-lg text-center">
-
-                    <h2>
-
-                        🌧 Rain Expected Tomorrow
-
-                    </h2>
-
-                    <p class="mb-0">
-
-                        Confidence :
-                        <strong>{{ confidence }}%</strong>
-
-                    </p>
-
-                </div>
-
-                {% else %}
-
-                <div class="alert alert-success shadow-lg text-center">
-
-                    <h2>
-
-                        ☀ No Rain Expected Tomorrow
-
-                    </h2>
-
-                    <p class="mb-0">
-
-                        Confidence :
-                        <strong>{{ confidence }}%</strong>
-
-                    </p>
-
-                </div>
-
-                {% endif %}
+                <i class="bi bi-cloud-rain-heavy-fill"></i>
 
             </div>
 
-            {% endif %}
+            <h1>
+
+                RainSense AI
+
+            </h1>
+
+            <p class="subtitle">
+
+                AI Powered Rainfall Prediction System
+
+            </p>
 
         </div>
+
+        <!-- ========================= -->
+        <!-- Search Form -->
+        <!-- ========================= -->
+
+        <form action="/predict"
+              method="POST">
+
+            <label>
+
+                <i class="bi bi-geo-alt-fill"></i>
+
+                Enter City
+
+            </label>
+
+            <input
+
+                type="text"
+
+                name="city"
+
+                placeholder="Example : Sydney"
+
+                required
+
+                autocomplete="off">
+
+            <button type="submit">
+
+                <i class="bi bi-search"></i>
+
+                Predict Weather
+
+            </button>
+
+        </form>
+
+        <!-- ========================= -->
+        <!-- Error -->
+        <!-- ========================= -->
+
+        {% if error %}
+
+        <div class="alert alert-danger mt-4">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <!-- ========================= -->
+        <!-- Prediction Result -->
+        <!-- ========================= -->
+
+        {% if prediction %}
+
+        <div class="result-card mt-5">
+
+            <div class="text-center">
+
+                <h2>
+
+                    <i class="bi bi-geo-alt-fill"></i>
+
+                    {{ city }}
+
+                </h2>
+
+                <h5 class="text-light">
+
+                    {{ country }}
+
+                </h5>
+
+            </div>
+
+            <hr>
+
+            <!-- Weather Cards -->
+
+            <div class="row g-3 mt-3">
+
+                <div class="col-md-6">
+
+                    <div class="weather-card">
+
+                        <div class="weather-icon">
+
+                            🌡
+
+                        </div>
+
+                        <h6>
+
+                            Temperature
+
+                        </h6>
+
+                        <h3>
+
+                            {{ weather.temperature }} °C
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="weather-card">
+
+                        <div class="weather-icon">
+
+                            💧
+
+                        </div>
+
+                        <h6>
+
+                            Humidity
+
+                        </h6>
+
+                        <h3>
+
+                            {{ weather.humidity }} %
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="weather-card">
+
+                        <div class="weather-icon">
+
+                            🌬
+
+                        </div>
+
+                        <h6>
+
+                            Wind Speed
+
+                        </h6>
+
+                        <h3>
+
+                            {{ weather.wind_speed }} km/h
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="weather-card">
+
+                        <div class="weather-icon">
+
+                            🌧
+
+                        </div>
+
+                        <h6>
+
+                            Rainfall
+
+                        </h6>
+
+                        <h3>
+
+                            {{ weather.rainfall }} mm
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="weather-card">
+
+                        <div class="weather-icon">
+
+                            ☀
+
+                        </div>
+
+                        <h6>
+
+                            Sunshine
+
+                        </h6>
+
+                        <h3>
+
+                            {{ weather.sunshine }} hrs
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr class="my-4">
+
+            <!-- ========================= -->
+            <!-- Prediction -->
+            <!-- ========================= -->
+
+            <div class="prediction-section text-center">
+
+                <h2>
+
+                    Prediction
+
+                </h2>
+
+                <div class="prediction-box">
+
+                    <h1>
+
+                        {{ prediction }}
+
+                    </h1>
+
+                    <p class="mt-3 mb-0 text-muted">
+
+                        <small>
+
+                            Prediction based on today's weather observations retrieved from Open-Meteo.
+
+                        </small>
+
+                    </p>
+
+                </div>
+                            </div>
+
+            <hr class="my-4">
+
+            <!-- ========================= -->
+            <!-- Probability -->
+            <!-- ========================= -->
+
+            <div class="probability-section">
+
+                <h5>
+
+                    🌧 Rain Probability
+
+                </h5>
+
+                <div class="progress mb-4">
+
+                    <div
+                        class="progress-bar bg-primary"
+
+                        role="progressbar"
+
+                        style="width: {{ rain_probability }}%;">
+
+                        {{ rain_probability }}%
+
+                    </div>
+
+                </div>
+
+                <h5>
+
+                    ☀ No Rain Probability
+
+                </h5>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar bg-success"
+
+                        role="progressbar"
+
+                        style="width: {{ no_rain_probability }}%;">
+
+                        {{ no_rain_probability }}%
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
 
     </div>
 
 </div>
 
-<footer class="text-center py-4 mt-5">
+<footer class="text-center mt-5 mb-3">
 
-    <p class="mb-0">
+    <p style="color:white;">
+
+        <small>
+
+            Weather data provided by Open-Meteo API.
+
+        </small>
+
+        <br>
+
+        <small>
+
+            Prediction based on today's weather observations.
+
+        </small>
+
+        <br><br>
 
         Developed by
-        <strong>Mohd Mubeen Sheikh</strong>
+
+        <strong>
+
+            Mohd Mubeen
+
+        </strong>
 
         <br>
 
@@ -979,7 +407,24 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function(){
+
+    const btn = form.querySelector("button");
+
+    btn.disabled = true;
+
+    btn.innerHTML = `
+        <span class="spinner-border spinner-border-sm"></span>
+        Fetching Weather...
+    `;
+
+});
+
+</script>
 
 </body>
 

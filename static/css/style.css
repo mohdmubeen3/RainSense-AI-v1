@@ -1,333 +1,304 @@
 /* ==========================================
    RainSense AI
-   Developed by Mohd Mubeen Sheikh
-   ========================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+   Professional UI
+========================================== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
-:root{
-
-    --primary:#2563eb;
-
-    --secondary:#38bdf8;
-
-    --success:#22c55e;
-
-    --danger:#ef4444;
-
-    --white:#ffffff;
-
-    --glass:rgba(255,255,255,.18);
-
-    --border:rgba(255,255,255,.30);
-
-    --shadow:0 25px 45px rgba(0,0,0,.12);
-
-    --radius:20px;
-
-    --transition:.35s ease;
-
-}
-
-html{
-
-    scroll-behavior:smooth;
-
-}
+/* ==========================================
+   Body
+========================================== */
 
 body{
 
-    font-family:'Poppins',sans-serif;
-
     min-height:100vh;
 
-    background:
-    linear-gradient(
-    135deg,
-    #1e3c72 0%,
-    #2a5298 50%,
-    #00c6ff 100%);
-
-    overflow-x:hidden;
-
-    position:relative;
-
-}
-
-/* ================================
-   Animated Background
-   ================================ */
-
-.background-animation{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:-1;
-
-    overflow:hidden;
-
-}
-
-.background-animation::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:450px;
-
-    height:450px;
-
-    background:#4facfe;
-
-    border-radius:50%;
-
-    top:-150px;
-
-    left:-120px;
-
-    opacity:.25;
-
-    filter:blur(80px);
-
-    animation:floatOne 10s infinite alternate;
-
-}
-
-.background-animation::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:500px;
-
-    height:500px;
-
-    background:#00f2fe;
-
-    border-radius:50%;
-
-    bottom:-200px;
-
-    right:-160px;
-
-    opacity:.22;
-
-    filter:blur(100px);
-
-    animation:floatTwo 12s infinite alternate;
-
-}
-
-@keyframes floatOne{
-
-    from{
-
-        transform:translateY(0) translateX(0);
-
-    }
-
-    to{
-
-        transform:translateY(80px) translateX(60px);
-
-    }
-
-}
-
-@keyframes floatTwo{
-
-    from{
-
-        transform:translateX(0);
-
-    }
-
-    to{
-
-        transform:translateX(-80px);
-
-    }
-
-}
-
-/* ================================
-   Glass Card
-   ================================ */
-
-.glass-card{
-
-    background:var(--glass);
-
-    border:1px solid var(--border);
-
-    border-radius:var(--radius);
-
-    backdrop-filter:blur(18px);
-
-    -webkit-backdrop-filter:blur(18px);
-
-    box-shadow:var(--shadow);
-
-    padding:45px;
-
-}
-
-/* ================================
-   Logo
-   ================================ */
-
-.logo-circle{
-
-    width:95px;
-
-    height:95px;
-
-    margin:auto;
-
-    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        #1e3c72,
+        #2a5298,
+        #4facfe
+    );
+
+    background-size:400% 400%;
+
+    animation:bgAnimation 12s ease infinite;
 
     display:flex;
 
-    align-items:center;
+    flex-direction:column;
 
     justify-content:center;
 
-    background:white;
+    align-items:center;
 
-    color:var(--primary);
+    padding:30px;
+}
 
-    font-size:42px;
+/* ==========================================
+   Background Animation
+========================================== */
 
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
+@keyframes bgAnimation{
+
+    0%{
+
+        background-position:0% 50%;
+
+    }
+
+    50%{
+
+        background-position:100% 50%;
+
+    }
+
+    100%{
+
+        background-position:0% 50%;
+
+    }
 
 }
 
-.main-title{
+/* ==========================================
+   Main Container
+========================================== */
+
+.main-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* ==========================================
+   Glass Card
+========================================== */
+
+.glass-card{
+
+    width:100%;
+
+    max-width:850px;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.20);
+
+    animation:fadeIn .8s ease;
+
+}
+
+/* ==========================================
+   Logo
+========================================== */
+
+.logo{
+
+    font-size:70px;
 
     color:white;
 
-    font-size:3rem;
+    margin-bottom:15px;
+
+}
+
+/* ==========================================
+   Title
+========================================== */
+
+h1{
+
+    color:white;
 
     font-weight:700;
 
-    margin-top:20px;
-
 }
 
-.sub-title{
+.subtitle{
 
-    color:#e5eefb;
+    color:white;
 
-    font-size:1.1rem;
+    opacity:.9;
 
     margin-top:10px;
 
+    margin-bottom:35px;
+
 }
 
-/* ================================
-   Section
-   ================================ */
+/* ==========================================
+   Form
+========================================== */
 
-.section-title{
+label{
 
-    font-size:1.8rem;
+    color:white;
 
     font-weight:600;
 
-    color:white;
+    margin-bottom:10px;
 
-    margin-bottom:12px;
-
-}
-
-.section-description{
-
-    color:#edf4ff;
-
-    margin-bottom:35px;
-
-    font-size:.98rem;
+    display:block;
 
 }
 
-/* ================================
-   Form Labels
-   ================================ */
+input{
 
-.form-label{
-
-    color:white;
-
-    font-weight:500;
-
-    margin-bottom:8px;
-
-}
-
-/* ================================
-   Inputs
-   ================================ */
-
-.form-control,
-
-.form-select{
-
-    border-radius:14px;
-
-    min-height:52px;
+    width:100%;
 
     border:none;
 
-    transition:var(--transition);
+    outline:none;
 
-    box-shadow:none;
+    padding:15px;
 
-}
+    border-radius:12px;
 
-.form-control:focus,
+    font-size:16px;
 
-.form-select:focus{
-
-    border:none;
-
-    box-shadow:
-    0 0 0 4px
-    rgba(37,99,235,.25);
+    margin-bottom:20px;
 
 }
 
-.form-control::placeholder{
-
-    color:#9aa7bc;
-
-}
 /* ==========================================
-   Progress Bar
+   Button
 ========================================== */
 
-.progress-wrapper{
+button{
 
-    margin-bottom:45px;
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#0d6efd;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.3s;
 
 }
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    background:#0056d6;
+
+}
+
+/* ==========================================
+   Result Card
+========================================== */
+
+.result-card{
+
+    margin-top:35px;
+
+}
+
+/* ==========================================
+   Weather Card
+========================================== */
+
+.weather-card{
+
+    background:rgba(255,255,255,.18);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    color:white;
+
+    height:100%;
+
+}
+
+.weather-card:hover{
+
+    transform:translateY(-8px);
+
+    background:rgba(255,255,255,.25);
+
+}
+
+.weather-icon{
+
+    font-size:40px;
+
+    margin-bottom:10px;
+
+}
+
+/* ==========================================
+   Prediction
+========================================== */
+
+.prediction-box{
+
+    margin-top:20px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    color:#0d6efd;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.prediction-box h1{
+
+    color:#0d6efd;
+
+    margin:0;
+
+}
+
+/* ==========================================
+   Progress
+========================================== */
 
 .progress{
 
-    height:12px;
+    height:28px;
 
-    border-radius:30px;
-
-    background:rgba(255,255,255,.20);
+    border-radius:20px;
 
     overflow:hidden;
 
@@ -335,355 +306,19 @@ body{
 
 .progress-bar{
 
-    background:linear-gradient(
-    90deg,
-    #38bdf8,
-    #2563eb);
-
-    border-radius:30px;
-
-    transition:.5s ease;
-
-}
-
-/* ==========================================
-   Step Indicator
-========================================== */
-
-.step-indicator{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-top:35px;
-
-}
-
-.step{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:10px;
-
-    flex:1;
-
-}
-
-.step .circle{
-
-    width:52px;
-
-    height:52px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.18);
-
-    color:white;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-weight:700;
-
-    font-size:18px;
-
-    border:2px solid rgba(255,255,255,.30);
-
-    transition:.4s;
-
-}
-
-.step span{
-
-    color:white;
-
-    font-size:.92rem;
-
-    font-weight:500;
-
-    text-align:center;
-
-}
-
-.step.active .circle{
-
-    background:white;
-
-    color:var(--primary);
-
-    transform:scale(1.08);
-
-    box-shadow:0 8px 25px rgba(0,0,0,.20);
-
-}
-
-.step.completed .circle{
-
-    background:var(--success);
-
-    color:white;
-
-}
-
-/* ==========================================
-   Form Steps
-========================================== */
-
-.form-step{
-
-    display:none;
-
-    animation:fadeSlide .45s ease;
-
-}
-
-.form-step.active{
-
-    display:block;
-
-}
-
-@keyframes fadeSlide{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(30px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/* ==========================================
-   Buttons
-========================================== */
-
-.button-group{
-
-    margin-top:45px;
-
-}
-
-.btn{
-
-    border-radius:14px;
+    font-size:14px;
 
     font-weight:600;
 
-    transition:.3s;
-
-    padding:13px 30px;
-
-}
-
-.btn-primary{
-
-    background:linear-gradient(
-    135deg,
-    #2563eb,
-    #38bdf8);
-
-    border:none;
-
-}
-
-.btn-primary:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:0 15px 30px rgba(37,99,235,.30);
-
-}
-
-.btn-outline-primary{
-
-    color:white;
-
-    border:2px solid white;
-
-}
-
-.btn-outline-primary:hover{
-
-    background:white;
-
-    color:var(--primary);
-
-}
-
-.btn-success{
-
-    border:none;
-
-    background:linear-gradient(
-    135deg,
-    #16a34a,
-    #22c55e);
-
-}
-
-.btn-success:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:0 15px 30px rgba(34,197,94,.35);
-
 }
 
 /* ==========================================
-   Input Hover
+   Horizontal Line
 ========================================== */
 
-.form-control:hover,
+hr{
 
-.form-select:hover{
-
-    transform:translateY(-2px);
-
-}
-
-.form-control:disabled{
-
-    background:#ececec;
-
-}
-
-/* ==========================================
-   Validation
-========================================== */
-
-.form-control.is-invalid,
-
-.form-select.is-invalid{
-
-    border:2px solid #ef4444;
-
-}
-
-.form-control.is-valid,
-
-.form-select.is-valid{
-
-    border:2px solid #22c55e;
-
-}
-
-/* ==========================================
-   Navigation Buttons
-========================================== */
-
-.next-btn{
-
-    min-width:180px;
-
-}
-
-.previous-btn{
-
-    min-width:180px;
-
-}
-
-/* ==========================================
-   Loading Button
-========================================== */
-
-.btn-loading{
-
-    pointer-events:none;
-
-    opacity:.8;
-
-}
-
-.spinner-border-sm{
-
-    margin-right:10px;
-
-}
-/* ==========================================
-   Prediction Result Card
-========================================== */
-
-.prediction-card{
-
-    margin-top:45px;
-
-    animation:resultFade .6s ease;
-
-}
-
-.prediction-card .alert{
-
-    border:none;
-
-    border-radius:20px;
-
-    padding:35px;
-
-    color:white;
-
-}
-
-.prediction-card .alert-success{
-
-    background:linear-gradient(
-    135deg,
-    #16a34a,
-    #22c55e);
-
-}
-
-.prediction-card .alert-danger{
-
-    background:linear-gradient(
-    135deg,
-    #dc2626,
-    #ef4444);
-
-}
-
-.prediction-card h2{
-
-    font-size:2rem;
-
-    font-weight:700;
-
-    margin-bottom:15px;
-
-}
-
-.prediction-card p{
-
-    font-size:1.15rem;
-
-    margin-bottom:0;
-
-}
-
-.prediction-card strong{
-
-    font-size:1.3rem;
+    border:1px solid rgba(255,255,255,.3);
 
 }
 
@@ -695,53 +330,25 @@ footer{
 
     color:white;
 
-    font-size:15px;
-
-    opacity:.9;
-
-}
-
-footer strong{
-
-    font-weight:700;
+    margin-top:25px;
 
 }
 
 /* ==========================================
-   Scrollbar
+   Alert
 ========================================== */
 
-::-webkit-scrollbar{
+.alert{
 
-    width:10px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#dbeafe;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#2563eb;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#1d4ed8;
+    border-radius:15px;
 
 }
 
 /* ==========================================
-   Animations
+   Fade Animation
 ========================================== */
 
-@keyframes resultFade{
+@keyframes fadeIn{
 
     from{
 
@@ -761,53 +368,9 @@ footer strong{
 
 }
 
-@keyframes pulse{
-
-    0%{
-
-        transform:scale(1);
-
-    }
-
-    50%{
-
-        transform:scale(1.05);
-
-    }
-
-    100%{
-
-        transform:scale(1);
-
-    }
-
-}
-
-.btn-success{
-
-    animation:pulse 2.5s infinite;
-
-}
-
 /* ==========================================
-   Responsive Design
+   Mobile
 ========================================== */
-
-@media(max-width:992px){
-
-    .glass-card{
-
-        padding:35px;
-
-    }
-
-    .main-title{
-
-        font-size:2.5rem;
-
-    }
-
-}
 
 @media(max-width:768px){
 
@@ -817,156 +380,22 @@ footer strong{
 
     }
 
-    .main-title{
+    .logo{
 
-        font-size:2rem;
-
-    }
-
-    .sub-title{
-
-        font-size:1rem;
+        font-size:55px;
 
     }
 
-    .step-indicator{
+    h1{
 
-        flex-wrap:wrap;
-
-        gap:20px;
+        font-size:30px;
 
     }
 
-    .step{
+    .weather-card{
 
-        width:48%;
-
-    }
-
-    .button-group{
-
-        display:flex;
-
-        flex-direction:column;
-
-        gap:15px;
+        margin-bottom:15px;
 
     }
 
-    .button-group .btn{
-
-        width:100%;
-
-    }
-
-    .prediction-card h2{
-
-        font-size:1.6rem;
-
-    }
-
-}
-
-@media(max-width:576px){
-
-    body{
-
-        padding:15px;
-
-    }
-
-    .logo-circle{
-
-        width:75px;
-
-        height:75px;
-
-        font-size:32px;
-
-    }
-
-    .main-title{
-
-        font-size:1.7rem;
-
-    }
-
-    .section-title{
-
-        font-size:1.35rem;
-
-    }
-
-    .step{
-
-        width:100%;
-
-    }
-
-    .step span{
-
-        font-size:.85rem;
-
-    }
-
-    .form-control,
-
-    .form-select{
-
-        min-height:48px;
-
-    }
-
-    .prediction-card .alert{
-
-        padding:25px;
-
-    }
-
-}
-
-/* ==========================================
-   Utility Classes
-========================================== */
-
-.text-gradient{
-
-    background:linear-gradient(
-    90deg,
-    #ffffff,
-    #dbeafe);
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-
-}
-
-.shadow-soft{
-
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
-
-}
-
-.rounded-xl{
-
-    border-radius:20px;
-
-}
-
-.fade-in{
-
-    animation:resultFade .5s ease;
-
-}
-
-.hidden{
-
-    display:none;
-
-}
-
-.show{
-
-    display:block;
 }
